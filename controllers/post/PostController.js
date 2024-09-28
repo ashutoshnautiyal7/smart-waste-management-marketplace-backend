@@ -40,28 +40,7 @@ class PostController {
               name: true,
               image: true,
             }
-          },
-            comments: {
-                select: {
-                  id: true,
-                    userId: true,
-                    user: {
-                      select: {
-                        name: true,
-                        image: true,
-                      }
-                    },
-                    content: true
-                },
-                orderBy: {
-                  createdAt: 'desc'
-                }
-            }, 
-            likes: {
-              select:{
-                userId: true,
-              }
-            }
+          }
         },
         orderBy: {
           createdAt: 'desc'
@@ -69,13 +48,7 @@ class PostController {
       });
 
       const formattedPosts = posts.map(post => {
-        const formattedComments = post.comments.map(comment => ({
-          userId: comment.userId,
-          username: comment.user.name,
-          userImage: comment.user.image,
-          content: comment.content,
-          commentId: comment.id
-        }));
+      
 
         const formattedName =post.user.name;
         const userImage = post.user.image; 
@@ -85,7 +58,6 @@ class PostController {
           size: posts.size,
           user: formattedName,
           userImage : userImage,
-          comments: formattedComments
         };
       });
 
