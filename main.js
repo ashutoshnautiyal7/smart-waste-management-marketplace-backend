@@ -110,7 +110,7 @@ app.post('/recycle', upload.single('image'), async (req, res) => {
       // Send the request to the Ollama server
       const output = await ollama.generate({
         model: 'llava:13b',
-        prompt: "How can I recycle the waste in the image? Provide specific methods and include any helpful links or resources.",
+        prompt: "How can I recycle the waste in the image? Provide specific methods and include any helpful links or resources in India.",
         images: [imageBase64],
       });
       
