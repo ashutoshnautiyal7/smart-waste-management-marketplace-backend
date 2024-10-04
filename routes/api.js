@@ -6,12 +6,19 @@ import authMiddleware from "../middleware/Authenticate.js";
 
 import ProfileController from "../controllers/user/ProfileController.js";
 import CommunityPostController from "../controllers/communityPost/PostController.js";
+import ErpController from "../controllers/epr/AuthController.js";
+
 
 const router = Router();
 
 //authentication  
 router.post('/auth/register', AuthController.register)
 router.post('/auth/login', AuthController.login)
+
+//authentication for company
+
+router.post('/auth-erp/register', ErpController.register)
+router.post('/auth-erp/login', ErpController.login)
 
 // post 
 router.post('/createpost', PostController.createPost)

@@ -6,7 +6,7 @@ generator client {
 datasource db {
   provider = "mongodb"
   url      = env("DATABASE_URL")
-}
+} 
 
 model User {
   id          String  @id @default(auto()) @map("_id") @db.ObjectId
@@ -16,7 +16,7 @@ model User {
   password    String
   address String? 
   image String?
-
+  phone String?
 
   posts     Post[]
   communityPosts CommunityPost[]
@@ -33,6 +33,7 @@ model Post {
   title     String
   content   String
   images    String[]
+  wasteCategory WasteCategory @default(PLASTIC)
   price String
   address String
   city String
@@ -76,4 +77,32 @@ model Like {
   userId    String   @db.ObjectId
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+
+// epr system for uttarakhand region 
+
+// Enum for waste categories
+enum WasteCategory {
+  PAPER
+  PLASTIC
+  E_WASTE
+  METAL
+  GLASS
+  ORGANIC
+}
+
+
+// Model for Company (Brands)
+
+model Company {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  name        String
+  category    WasteCategory
+  address     String
+  email       String       @unique
+  phoneNumber String
+  password    String       // Store the encrypted password
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
 }

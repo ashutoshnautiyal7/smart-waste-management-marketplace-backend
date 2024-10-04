@@ -110,15 +110,18 @@ app.post('/recycle', upload.single('image'), async (req, res) => {
       // Send the request to the Ollama server
       const output = await ollama.generate({
         model: 'llava:13b',
-        prompt: "How can I recycle the waste in the image? Provide specific methods and include any helpful links or resources in India.",
+        prompt: "Identify waste items in this image. Segregate the waste and list recycling mehtods. ",
         images: [imageBase64],
-      });
+      }); 
+
+
+      const resources ="https://www.youtube.com/watch?v=4JDGFNoY-rQ https://udd.uk.gov.in/files/20170825_SWM_action_plan__revised_final_draft_with_comments_sent_to_state-_August_II.pdf"
       
   
-      console.log("the output is " , output.response);
+      console.log("the output is " , output.response + resources);
   
       // Send the response from LLava model back to the client
-      res.json({ description: output.response });
+      res.json({ description: output.response +  resources});
   
     } catch (error) {
       console.error('Error:', error);

@@ -39,6 +39,7 @@ class PostController {
             select: {
               name: true,
               image: true,
+              phone: true
             }
           }
         },
@@ -173,7 +174,7 @@ class PostController {
 
       const { id: userId } = decoded;
 
-      const { title, content, images = [], price, address, city } = req.body;
+      const { title, content, images = [], price, address, city, wasteCategory } = req.body;
 
       // Create the post in the database
       const post = await prisma.post.create({
@@ -184,7 +185,8 @@ class PostController {
           userId,
           price, 
           address, 
-          city
+          city,
+          wasteCategory
         },
       });
 
@@ -198,6 +200,9 @@ class PostController {
       return res.status(500).json({ message: "Internal Server Error" });
     }
   }
+
+
+  // not done ye
 
   static async updatePost(req, res) {
     try {
